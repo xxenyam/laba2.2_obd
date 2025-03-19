@@ -1,193 +1,193 @@
--- Завдання 3 
--- 1. Пошук власників компаній без по батькові
+-- Г‡Г ГўГ¤Г Г­Г­Гї 4  
+-- 1. ГЏГ®ГёГіГЄ ГўГ«Г Г±Г­ГЁГЄВіГў ГЄГ®Г¬ГЇГ Г­ВіГ© ГЎГҐГ§ ГЇГ® ГЎГ ГІГјГЄГ®ГўВі
 SELECT * 
 FROM company_owner
 WHERE surname IS NULL;
--- 2. Пошук компаній, у назві яких є слово "Буд"
+-- 2. ГЏГ®ГёГіГЄ ГЄГ®Г¬ГЇГ Г­ВіГ©, Гі Г­Г Г§ГўВі ГїГЄГЁГµ Вє Г±Г«Г®ГўГ® "ГЃГіГ¤"
 SELECT * 
 FROM company
-WHERE company_name LIKE '%Буд%'
--- 3. Вибірка компаній з ідентифікатором власника більше 50
+WHERE company_name LIKE '%ГЃГіГ¤%'
+-- 3. Г‚ГЁГЎВіГ°ГЄГ  ГЄГ®Г¬ГЇГ Г­ВіГ© Г§ ВіГ¤ГҐГ­ГІГЁГґВіГЄГ ГІГ®Г°Г®Г¬ ГўГ«Г Г±Г­ГЁГЄГ  ГЎВіГ«ГјГёГҐ 50
 SELECT * 
 FROM company_owner_company
 WHERE owner_id > 50;
--- 4. Пошук електроніки з ціною менше або рівною 10 000
+-- 4. ГЏГ®ГёГіГЄ ГҐГ«ГҐГЄГІГ°Г®Г­ВіГЄГЁ Г§ Г¶ВіГ­Г®Гѕ Г¬ГҐГ­ГёГҐ Г ГЎГ® Г°ВіГўГ­Г®Гѕ 10 000
 SELECT * 
 FROM product
-WHERE type = 'Електроніка' AND price_per_unit <= 10000;
--- 5. Пошук продуктів з кількістю більше 50 одиниць
+WHERE type = 'Г…Г«ГҐГЄГІГ°Г®Г­ВіГЄГ ' AND price_per_unit <= 10000;
+-- 5. ГЏГ®ГёГіГЄ ГЇГ°Г®Г¤ГіГЄГІВіГў Г§ ГЄВіГ«ГјГЄВіГ±ГІГѕ ГЎВіГ«ГјГёГҐ 50 Г®Г¤ГЁГ­ГЁГ¶Гј
 SELECT * 
 FROM company_product
 WHERE product_quantity > 50;
--- 6. Пошук кількості контрактів для кожного постачальника у визначений період
+-- 6. ГЏГ®ГёГіГЄ ГЄВіГ«ГјГЄГ®Г±ГІВі ГЄГ®Г­ГІГ°Г ГЄГІВіГў Г¤Г«Гї ГЄГ®Г¦Г­Г®ГЈГ® ГЇГ®Г±ГІГ Г·Г Г«ГјГ­ГЁГЄГ  Гі ГўГЁГ§Г­Г Г·ГҐГ­ГЁГ© ГЇГҐГ°ВіГ®Г¤
 SELECT supplier_company, COUNT(*) AS contract_count
 FROM contract
 WHERE contract_date BETWEEN '2024-01-01' AND '2025-06-30'
 GROUP BY supplier_company;
 
--- Завдання 4
--- 1. Вибрати всіх власників компаній, у яких є по батькові та телефон не починається з '050'
+-- Г‡Г ГўГ¤Г Г­Г­Гї 5
+-- 1. Г‚ГЁГЎГ°Г ГІГЁ ГўГ±ВіГµ ГўГ«Г Г±Г­ГЁГЄВіГў ГЄГ®Г¬ГЇГ Г­ВіГ©, Гі ГїГЄГЁГµ Вє ГЇГ® ГЎГ ГІГјГЄГ®ГўВі ГІГ  ГІГҐГ«ГҐГґГ®Г­ Г­ГҐ ГЇГ®Г·ГЁГ­Г ВєГІГјГ±Гї Г§ '050'
 SELECT * 
 FROM company_owner
 WHERE surname IS NOT NULL AND phone_number NOT LIKE '050%';
--- 2. Вибрати всі компанії, у яких у назві є слово "Торг" або "Буд"
+-- 2. Г‚ГЁГЎГ°Г ГІГЁ ГўГ±Ві ГЄГ®Г¬ГЇГ Г­ВіВї, Гі ГїГЄГЁГµ Гі Г­Г Г§ГўВі Вє Г±Г«Г®ГўГ® "Г’Г®Г°ГЈ" Г ГЎГ® "ГЃГіГ¤"
 SELECT * 
 FROM company
-WHERE company_name LIKE '%Торг%' OR company_name LIKE '%Буд%';
--- 3. Вибрати всі зв’язки між власниками та компаніями, де власник має ID більше 40, але не 45 і не 50
+WHERE company_name LIKE '%Г’Г®Г°ГЈ%' OR company_name LIKE '%ГЃГіГ¤%';
+-- 3. Г‚ГЁГЎГ°Г ГІГЁ ГўГ±Ві Г§ГўвЂ™ГїГ§ГЄГЁ Г¬ВіГ¦ ГўГ«Г Г±Г­ГЁГЄГ Г¬ГЁ ГІГ  ГЄГ®Г¬ГЇГ Г­ВіГїГ¬ГЁ, Г¤ГҐ ГўГ«Г Г±Г­ГЁГЄ Г¬Г Вє ID ГЎВіГ«ГјГёГҐ 40, Г Г«ГҐ Г­ГҐ 45 Ві Г­ГҐ 50
 SELECT * 
 FROM company_owner_company
 WHERE owner_id > 40 AND owner_id NOT IN (45, 50);
--- 4. Вибрати всі товари типу "Побутова техніка", які коштують від 5000 до 20000
+-- 4. Г‚ГЁГЎГ°Г ГІГЁ ГўГ±Ві ГІГ®ГўГ Г°ГЁ ГІГЁГЇГі "ГЏГ®ГЎГіГІГ®ГўГ  ГІГҐГµГ­ВіГЄГ ", ГїГЄВі ГЄГ®ГёГІГіГѕГІГј ГўВіГ¤ 5000 Г¤Г® 20000
 SELECT * 
 FROM product
-WHERE type = 'Побутова техніка' AND price_per_unit BETWEEN 5000 AND 20000;
--- 5. Вибрати всі товари, де кількість на складі або більше 100, або ціна нижча за 5000
+WHERE type = 'ГЏГ®ГЎГіГІГ®ГўГ  ГІГҐГµГ­ВіГЄГ ' AND price_per_unit BETWEEN 5000 AND 20000;
+-- 5. Г‚ГЁГЎГ°Г ГІГЁ ГўГ±Ві ГІГ®ГўГ Г°ГЁ, Г¤ГҐ ГЄВіГ«ГјГЄВіГ±ГІГј Г­Г  Г±ГЄГ«Г Г¤Ві Г ГЎГ® ГЎВіГ«ГјГёГҐ 100, Г ГЎГ® Г¶ВіГ­Г  Г­ГЁГ¦Г·Г  Г§Г  5000
 SELECT * 
 FROM company_product
 WHERE product_quantity >= 100;
--- 6. Вибрати компанії, які мають більше ніж 5 укладених контрактів, але не є постачальниками 'ТОВ Альфа'
+-- 6. Г‚ГЁГЎГ°Г ГІГЁ ГЄГ®Г¬ГЇГ Г­ВіВї, ГїГЄВі Г¬Г ГѕГІГј ГЎВіГ«ГјГёГҐ Г­ВіГ¦ 5 ГіГЄГ«Г Г¤ГҐГ­ГЁГµ ГЄГ®Г­ГІГ°Г ГЄГІВіГў, Г Г«ГҐ Г­ГҐ Вє ГЇГ®Г±ГІГ Г·Г Г«ГјГ­ГЁГЄГ Г¬ГЁ 'Г’ГЋГ‚ ГЂГ«ГјГґГ '
 SELECT supplier_company, COUNT(*) AS contract_count
 FROM contract
-WHERE supplier_company != 'ТОВ Альфа'
+WHERE supplier_company != 'Г’ГЋГ‚ ГЂГ«ГјГґГ '
 GROUP BY supplier_company
 HAVING COUNT(*) > 5;
 
--- Завдання 5
--- 1. Вибрати власників компаній, у яких прізвище починається на "Пет"
+-- Г‡Г ГўГ¤Г Г­Г­Гї 6
+-- 1. Г‚ГЁГЎГ°Г ГІГЁ ГўГ«Г Г±Г­ГЁГЄВіГў ГЄГ®Г¬ГЇГ Г­ВіГ©, Гі ГїГЄГЁГµ ГЇГ°ВіГ§ГўГЁГ№ГҐ ГЇГ®Г·ГЁГ­Г ВєГІГјГ±Гї Г­Г  "ГЏГҐГІ"
 SELECT * 
 FROM company_owner
-WHERE last_name LIKE 'Пет%';
--- 2. Вибрати компанії, назва яких містить слово "Еко"
+WHERE last_name LIKE 'ГЏГҐГІ%';
+-- 2. Г‚ГЁГЎГ°Г ГІГЁ ГЄГ®Г¬ГЇГ Г­ВіВї, Г­Г Г§ГўГ  ГїГЄГЁГµ Г¬ВіГ±ГІГЁГІГј Г±Г«Г®ГўГ® "Г…ГЄГ®"
 SELECT * 
 FROM company
-WHERE company_name LIKE '%Еко%';
--- 3. Вибрати продукти, у назві яких є слово "Про"
+WHERE company_name LIKE '%Г…ГЄГ®%';
+-- 3. Г‚ГЁГЎГ°Г ГІГЁ ГЇГ°Г®Г¤ГіГЄГІГЁ, Гі Г­Г Г§ГўВі ГїГЄГЁГµ Вє Г±Г«Г®ГўГ® "ГЏГ°Г®"
 SELECT * 
 FROM product
-WHERE name LIKE '%Про%';
--- 4. Вибрати договори, номер яких починається з "2024-"
+WHERE name LIKE '%ГЏГ°Г®%';
+-- 4. Г‚ГЁГЎГ°Г ГІГЁ Г¤Г®ГЈГ®ГўГ®Г°ГЁ, Г­Г®Г¬ГҐГ° ГїГЄГЁГµ ГЇГ®Г·ГЁГ­Г ВєГІГјГ±Гї Г§ "2024-"
 SELECT * 
 FROM contract
 WHERE contract_date LIKE '2024-%';
--- 5. Вибрати компанії, у яких адреса починається з "вул. Центральна"
+-- 5. Г‚ГЁГЎГ°Г ГІГЁ ГЄГ®Г¬ГЇГ Г­ВіВї, Гі ГїГЄГЁГµ Г Г¤Г°ГҐГ±Г  ГЇГ®Г·ГЁГ­Г ВєГІГјГ±Гї Г§ "ГўГіГ«. Г–ГҐГ­ГІГ°Г Г«ГјГ­Г "
 SELECT * 
 FROM company
-WHERE address LIKE 'вул. Центральна%';
--- 6. Вибрати контракти, номер яких закінчується на "01"
+WHERE address LIKE 'ГўГіГ«. Г–ГҐГ­ГІГ°Г Г«ГјГ­Г %';
+-- 6. Г‚ГЁГЎГ°Г ГІГЁ ГЄГ®Г­ГІГ°Г ГЄГІГЁ, Г­Г®Г¬ГҐГ° ГїГЄГЁГµ Г§Г ГЄВіГ­Г·ГіВєГІГјГ±Гї Г­Г  "01"
 SELECT * 
 FROM contract
 WHERE contract_number LIKE '%01';
 
--- Завдання 6
--- 1. Вибрати компанії та їхніх власників
+-- Г‡Г ГўГ¤Г Г­Г­Гї 7
+-- 1. Г‚ГЁГЎГ°Г ГІГЁ ГЄГ®Г¬ГЇГ Г­ВіВї ГІГ  ВїГµГ­ВіГµ ГўГ«Г Г±Г­ГЁГЄВіГў
 SELECT company.company_name, company_owner.first_name, company_owner.last_name
 FROM company
 JOIN company_owner_company ON company.company_name = company_owner_company.company_name
 JOIN company_owner ON company_owner_company.owner_id = company_owner.owner_id;
--- 2. Вибрати продукти та компанії, які їх виробляють
+-- 2. Г‚ГЁГЎГ°Г ГІГЁ ГЇГ°Г®Г¤ГіГЄГІГЁ ГІГ  ГЄГ®Г¬ГЇГ Г­ВіВї, ГїГЄВі ВїГµ ГўГЁГ°Г®ГЎГ«ГїГѕГІГј
 SELECT product.name, company.company_name
 FROM company_product
 JOIN product ON company_product.product_id = product.product_id
 JOIN company ON company_product.company_name = company.company_name;
--- 3. Вибрати контракти та компанії, які є постачальниками
+-- 3. Г‚ГЁГЎГ°Г ГІГЁ ГЄГ®Г­ГІГ°Г ГЄГІГЁ ГІГ  ГЄГ®Г¬ГЇГ Г­ВіВї, ГїГЄВі Вє ГЇГ®Г±ГІГ Г·Г Г«ГјГ­ГЁГЄГ Г¬ГЁ
 SELECT contract.contract_number, contract.contract_date, company.company_name AS supplier
 FROM contract
 JOIN company ON contract.supplier_company = company.company_name;
--- 4. Вибрати контракти та компанії, які є постачальниками та отримувачами
+-- 4. Г‚ГЁГЎГ°Г ГІГЁ ГЄГ®Г­ГІГ°Г ГЄГІГЁ ГІГ  ГЄГ®Г¬ГЇГ Г­ВіВї, ГїГЄВі Вє ГЇГ®Г±ГІГ Г·Г Г«ГјГ­ГЁГЄГ Г¬ГЁ ГІГ  Г®ГІГ°ГЁГ¬ГіГўГ Г·Г Г¬ГЁ
 SELECT contract.contract_number, contract.contract_date, contract.termin, 
        supplier.company_name AS supplier, receiver.company_name AS receiver
 FROM contract
 JOIN company AS supplier ON contract.supplier_company = supplier.company_name
 JOIN company AS receiver ON contract.receiver_company = receiver.company_name;
--- 5. Вибрати власників компаній, у яких відсутнє по батькові
+-- 5. Г‚ГЁГЎГ°Г ГІГЁ ГўГ«Г Г±Г­ГЁГЄВіГў ГЄГ®Г¬ГЇГ Г­ВіГ©, Гі ГїГЄГЁГµ ГўВіГ¤Г±ГіГІГ­Вє ГЇГ® ГЎГ ГІГјГЄГ®ГўВі
 SELECT company.company_name, company_owner.first_name, company_owner.last_name, company_owner.phone_number
 FROM company
 JOIN company_owner_company ON company.company_name = company_owner_company.company_name
 JOIN company_owner ON company_owner_company.owner_id = company_owner.owner_id
 WHERE company_owner.surname IS NULL;
--- 6. Вибрати всі продукти та їхні контракти, якщо такі є
+-- 6. Г‚ГЁГЎГ°Г ГІГЁ ГўГ±Ві ГЇГ°Г®Г¤ГіГЄГІГЁ ГІГ  ВїГµГ­Ві ГЄГ®Г­ГІГ°Г ГЄГІГЁ, ГїГЄГ№Г® ГІГ ГЄВі Вє
 SELECT product.name, contract.contract_number
 FROM product
 LEFT JOIN contract ON product.product_id = contract.product_id;
 
--- Завдання 7
--- 1. Вибір компаній та їхніх власників, де є відповідність у обох таблицях
+-- Г‡Г ГўГ¤Г Г­Г­Гї 8
+-- 1. Г‚ГЁГЎВіГ° ГЄГ®Г¬ГЇГ Г­ВіГ© ГІГ  ВїГµГ­ВіГµ ГўГ«Г Г±Г­ГЁГЄВіГў, Г¤ГҐ Вє ГўВіГ¤ГЇГ®ГўВіГ¤Г­ВіГ±ГІГј Гі Г®ГЎГ®Гµ ГІГ ГЎГ«ГЁГ¶ГїГµ
 SELECT company.company_name, company_owner.first_name, company_owner.last_name
 FROM company
 INNER JOIN company_owner_company ON company.company_name = company_owner_company.company_name
 INNER JOIN company_owner ON company_owner_company.owner_id = company_owner.owner_id;
--- 2. Вибір всіх компаній і їхніх власників, навіть якщо в таблиці власників немає відповідних даних
+-- 2. Г‚ГЁГЎВіГ° ГўГ±ВіГµ ГЄГ®Г¬ГЇГ Г­ВіГ© Ві ВїГµГ­ВіГµ ГўГ«Г Г±Г­ГЁГЄВіГў, Г­Г ГўВіГІГј ГїГЄГ№Г® Гў ГІГ ГЎГ«ГЁГ¶Ві ГўГ«Г Г±Г­ГЁГЄВіГў Г­ГҐГ¬Г Вє ГўВіГ¤ГЇГ®ГўВіГ¤Г­ГЁГµ Г¤Г Г­ГЁГµ
 SELECT company.company_name, company_owner.first_name, company_owner.last_name
 FROM company
 LEFT JOIN company_owner_company ON company.company_name = company_owner_company.company_name
 LEFT JOIN company_owner ON company_owner_company.owner_id = company_owner.owner_id;
--- 3. Вибір всіх власників і компаній, навіть якщо деякі компанії не мають власників
+-- 3. Г‚ГЁГЎВіГ° ГўГ±ВіГµ ГўГ«Г Г±Г­ГЁГЄВіГў Ві ГЄГ®Г¬ГЇГ Г­ВіГ©, Г­Г ГўВіГІГј ГїГЄГ№Г® Г¤ГҐГїГЄВі ГЄГ®Г¬ГЇГ Г­ВіВї Г­ГҐ Г¬Г ГѕГІГј ГўГ«Г Г±Г­ГЁГЄВіГў
 SELECT company.company_name, company_owner.first_name, company_owner.last_name
 FROM company
 RIGHT JOIN company_owner_company ON company.company_name = company_owner_company.company_name
 RIGHT JOIN company_owner ON company_owner_company.owner_id = company_owner.owner_id;
--- 4. Вибір всіх компаній і власників, включаючи ті, що не мають відповідності між таблицями
+-- 4. Г‚ГЁГЎВіГ° ГўГ±ВіГµ ГЄГ®Г¬ГЇГ Г­ВіГ© Ві ГўГ«Г Г±Г­ГЁГЄВіГў, ГўГЄГ«ГѕГ·Г ГѕГ·ГЁ ГІВі, Г№Г® Г­ГҐ Г¬Г ГѕГІГј ГўВіГ¤ГЇГ®ГўВіГ¤Г­Г®Г±ГІВі Г¬ВіГ¦ ГІГ ГЎГ«ГЁГ¶ГїГ¬ГЁ
 SELECT company.company_name, company_owner.first_name, company_owner.last_name
 FROM company
 FULL JOIN company_owner_company ON company.company_name = company_owner_company.company_name
 FULL JOIN company_owner ON company_owner_company.owner_id = company_owner.owner_id;
--- 5. Вибір всіх компаній і продуктів, навіть якщо деякі компанії не мають продуктів
+-- 5. Г‚ГЁГЎВіГ° ГўГ±ВіГµ ГЄГ®Г¬ГЇГ Г­ВіГ© Ві ГЇГ°Г®Г¤ГіГЄГІВіГў, Г­Г ГўВіГІГј ГїГЄГ№Г® Г¤ГҐГїГЄВі ГЄГ®Г¬ГЇГ Г­ВіВї Г­ГҐ Г¬Г ГѕГІГј ГЇГ°Г®Г¤ГіГЄГІВіГў
 SELECT company.company_name, product.name
 FROM company
 LEFT JOIN company_product ON company.company_name = company_product.company_name
 LEFT JOIN product ON company_product.product_id = product.product_id;
 
--- Завдання 8
--- 1. Вибір компаній, де сума кількості продуктів більша за середню кількість продуктів по всіх компаніях
+-- Г‡Г ГўГ¤Г Г­Г­Гї 9
+-- 1. Г‚ГЁГЎВіГ° ГЄГ®Г¬ГЇГ Г­ВіГ©, Г¤ГҐ Г±ГіГ¬Г  ГЄВіГ«ГјГЄГ®Г±ГІВі ГЇГ°Г®Г¤ГіГЄГІВіГў ГЎВіГ«ГјГёГ  Г§Г  Г±ГҐГ°ГҐГ¤Г­Гѕ ГЄВіГ«ГјГЄВіГ±ГІГј ГЇГ°Г®Г¤ГіГЄГІВіГў ГЇГ® ГўГ±ВіГµ ГЄГ®Г¬ГЇГ Г­ВіГїГµ
 SELECT company.company_name
 FROM company
 JOIN company_product ON company.company_name = company_product.company_name
 GROUP BY company.company_name
 HAVING SUM(company_product.product_quantity) > (SELECT AVG(product_quantity) FROM company_product);
--- 2. Вибір компаній, що мають продукти, що належать такій же компанії, як і компанія з назвою "ТехноКорп"
+-- 2. Г‚ГЁГЎВіГ° ГЄГ®Г¬ГЇГ Г­ВіГ©, Г№Г® Г¬Г ГѕГІГј ГЇГ°Г®Г¤ГіГЄГІГЁ, Г№Г® Г­Г Г«ГҐГ¦Г ГІГј ГІГ ГЄВіГ© Г¦ГҐ ГЄГ®Г¬ГЇГ Г­ВіВї, ГїГЄ Ві ГЄГ®Г¬ГЇГ Г­ВіГї Г§ Г­Г Г§ГўГ®Гѕ "Г’ГҐГµГ­Г®ГЉГ®Г°ГЇ"
 SELECT company.company_name
 FROM company
 WHERE company.company_name IN (SELECT company_name FROM company_product
-WHERE company_name = (SELECT company_name FROM company WHERE company_name = 'ТехноКорп'));
--- 3. Вибір компаній, що мають більше продуктів, ніж компанія з ID = '1'
+WHERE company_name = (SELECT company_name FROM company WHERE company_name = 'Г’ГҐГµГ­Г®ГЉГ®Г°ГЇ'));
+-- 3. Г‚ГЁГЎВіГ° ГЄГ®Г¬ГЇГ Г­ВіГ©, Г№Г® Г¬Г ГѕГІГј ГЎВіГ«ГјГёГҐ ГЇГ°Г®Г¤ГіГЄГІВіГў, Г­ВіГ¦ ГЄГ®Г¬ГЇГ Г­ВіГї Г§ ID = '1'
 SELECT company.company_name
 FROM company
 JOIN company_product ON company.company_name = company_product.company_name
 GROUP BY company.company_name
 HAVING COUNT(company_product.product_id) > (SELECT COUNT(product_id) FROM company_product WHERE company_name = 'Company1');
--- 4. Вибір компаній, у яких немає продуктів
+-- 4. Г‚ГЁГЎВіГ° ГЄГ®Г¬ГЇГ Г­ВіГ©, Гі ГїГЄГЁГµ Г­ГҐГ¬Г Вє ГЇГ°Г®Г¤ГіГЄГІВіГў
 SELECT company.company_name
 FROM company
 LEFT JOIN company_product ON company.company_name = company_product.company_name
 WHERE company_product.product_id IS NULL;
--- 5. Вибір компаній, у яких є продукти, кількість яких більше за 50 одиниць
+-- 5. Г‚ГЁГЎВіГ° ГЄГ®Г¬ГЇГ Г­ВіГ©, Гі ГїГЄГЁГµ Вє ГЇГ°Г®Г¤ГіГЄГІГЁ, ГЄВіГ«ГјГЄВіГ±ГІГј ГїГЄГЁГµ ГЎВіГ«ГјГёГҐ Г§Г  50 Г®Г¤ГЁГ­ГЁГ¶Гј
 SELECT company.company_name
 FROM company
 JOIN company_product ON company.company_name = company_product.company_name
 WHERE company_product.product_quantity > 50;
 
--- Завдання 9
--- 1. Вибір компаній та загальної кількості продуктів, де кількість продуктів більша за 50 одиниць
+-- Г‡Г ГўГ¤Г Г­Г­Гї 10
+-- 1. Г‚ГЁГЎВіГ° ГЄГ®Г¬ГЇГ Г­ВіГ© ГІГ  Г§Г ГЈГ Г«ГјГ­Г®Вї ГЄВіГ«ГјГЄГ®Г±ГІВі ГЇГ°Г®Г¤ГіГЄГІВіГў, Г¤ГҐ ГЄВіГ«ГјГЄВіГ±ГІГј ГЇГ°Г®Г¤ГіГЄГІВіГў ГЎВіГ«ГјГёГ  Г§Г  50 Г®Г¤ГЁГ­ГЁГ¶Гј
 SELECT company.company_name, SUM(company_product.product_quantity) AS total_quantity
 FROM company
 JOIN company_product ON company.company_name = company_product.company_name
 GROUP BY company.company_name
 HAVING SUM(company_product.product_quantity) > 50;
--- 2. Вибір компаній та кількості продуктів для кожної категорії продуктів, де кількість одиниць продукції більше за 50
+-- 2. Г‚ГЁГЎВіГ° ГЄГ®Г¬ГЇГ Г­ВіГ© ГІГ  ГЄВіГ«ГјГЄГ®Г±ГІВі ГЇГ°Г®Г¤ГіГЄГІВіГў Г¤Г«Гї ГЄГ®Г¦Г­Г®Вї ГЄГ ГІГҐГЈГ®Г°ВіВї ГЇГ°Г®Г¤ГіГЄГІВіГў, Г¤ГҐ ГЄВіГ«ГјГЄВіГ±ГІГј Г®Г¤ГЁГ­ГЁГ¶Гј ГЇГ°Г®Г¤ГіГЄГ¶ВіВї ГЎВіГ«ГјГёГҐ Г§Г  50
 SELECT company.company_name, product.type AS product_type, SUM(company_product.product_quantity) AS total_quantity
 FROM company
 JOIN company_product ON company.company_name = company_product.company_name
 JOIN product ON company_product.product_id = product.product_id
 GROUP BY company.company_name, product.type
 HAVING SUM(company_product.product_quantity) > 50;
--- 3. Вибір компаній, що мають більше одного продукту, і кількості таких продуктів
+-- 3. Г‚ГЁГЎВіГ° ГЄГ®Г¬ГЇГ Г­ВіГ©, Г№Г® Г¬Г ГѕГІГј ГЎВіГ«ГјГёГҐ Г®Г¤Г­Г®ГЈГ® ГЇГ°Г®Г¤ГіГЄГІГі, Ві ГЄВіГ«ГјГЄГ®Г±ГІВі ГІГ ГЄГЁГµ ГЇГ°Г®Г¤ГіГЄГІВіГў
 SELECT company.company_name, COUNT(DISTINCT company_product.product_id) AS num_products
 FROM company
 JOIN company_product ON company.company_name = company_product.company_name
 GROUP BY company.company_name
 HAVING COUNT(DISTINCT company_product.product_id) > 1;
--- 4. Вибір власників компаній, у яких кількість продуктів більше за 50 одиниць
+-- 4. Г‚ГЁГЎВіГ° ГўГ«Г Г±Г­ГЁГЄВіГў ГЄГ®Г¬ГЇГ Г­ВіГ©, Гі ГїГЄГЁГµ ГЄВіГ«ГјГЄВіГ±ГІГј ГЇГ°Г®Г¤ГіГЄГІВіГў ГЎВіГ«ГјГёГҐ Г§Г  50 Г®Г¤ГЁГ­ГЁГ¶Гј
 SELECT company_owner.first_name, company_owner.last_name, SUM(company_product.product_quantity) AS total_quantity
 FROM company_owner
 JOIN company_owner_company ON company_owner.owner_id = company_owner_company.owner_id
@@ -195,7 +195,7 @@ JOIN company ON company_owner_company.company_name = company.company_name
 JOIN company_product ON company.company_name = company_product.company_name
 GROUP BY company_owner.first_name, company_owner.last_name
 HAVING SUM(company_product.product_quantity) > 50;
--- 5. Вибір типів продуктів, що постачаються більше ніж однією компанією, та кількість таких постачань
+-- 5. Г‚ГЁГЎВіГ° ГІГЁГЇВіГў ГЇГ°Г®Г¤ГіГЄГІВіГў, Г№Г® ГЇГ®Г±ГІГ Г·Г ГѕГІГјГ±Гї ГЎВіГ«ГјГёГҐ Г­ВіГ¦ Г®Г¤Г­ВіВєГѕ ГЄГ®Г¬ГЇГ Г­ВіВєГѕ, ГІГ  ГЄВіГ«ГјГЄВіГ±ГІГј ГІГ ГЄГЁГµ ГЇГ®Г±ГІГ Г·Г Г­Гј
 SELECT product.type AS product_type, COUNT(DISTINCT company.company_name) AS num_suppliers
 FROM product
 JOIN company_product ON product.product_id = company_product.product_id
@@ -203,8 +203,8 @@ JOIN company ON company_product.company_name = company.company_name
 GROUP BY product.type
 HAVING COUNT(DISTINCT company.company_name) > 1;
 
--- Завдання 10
--- 1. Вибір компаній, чия посада має надбавку більше 9000.
+-- Г‡Г ГўГ¤Г Г­Г­Гї 11
+-- 1. Г‚ГЁГЎВіГ° ГЄГ®Г¬ГЇГ Г­ВіГ©, Г·ГЁГї ГЇГ®Г±Г Г¤Г  Г¬Г Вє Г­Г Г¤ГЎГ ГўГЄГі ГЎВіГ«ГјГёГҐ 9000.
 SELECT company.company_name
 FROM company
 WHERE company.company_name IN (
@@ -212,19 +212,19 @@ WHERE company.company_name IN (
     FROM company_product
     WHERE product_id IN (SELECT product_id FROM product WHERE price_per_unit > 9000)
 );
--- 2. Вибір компаній, які постачають хоча б 1 продукт.
+-- 2. Г‚ГЁГЎВіГ° ГЄГ®Г¬ГЇГ Г­ВіГ©, ГїГЄВі ГЇГ®Г±ГІГ Г·Г ГѕГІГј ГµГ®Г·Г  ГЎ 1 ГЇГ°Г®Г¤ГіГЄГІ.
 SELECT company.company_name, COUNT(DISTINCT company_product.product_id) AS num_products
 FROM company
 JOIN company_product ON company.company_name = company_product.company_name
 GROUP BY company.company_name
 HAVING COUNT(DISTINCT company_product.product_id) > 0;
--- 3. Вибір компаній, що постачають більше одного продукту.
+-- 3. Г‚ГЁГЎВіГ° ГЄГ®Г¬ГЇГ Г­ВіГ©, Г№Г® ГЇГ®Г±ГІГ Г·Г ГѕГІГј ГЎВіГ«ГјГёГҐ Г®Г¤Г­Г®ГЈГ® ГЇГ°Г®Г¤ГіГЄГІГі.
 SELECT company.company_name, COUNT(DISTINCT company_product.product_id) AS num_products
 FROM company
 JOIN company_product ON company.company_name = company_product.company_name
 GROUP BY company.company_name
 HAVING COUNT(DISTINCT company_product.product_id) > 1;
--- 4. Вибір компаній, чия загальна кількість продукції менша за середню кількість продукції у всіх компаніях.
+-- 4. Г‚ГЁГЎВіГ° ГЄГ®Г¬ГЇГ Г­ВіГ©, Г·ГЁГї Г§Г ГЈГ Г«ГјГ­Г  ГЄВіГ«ГјГЄВіГ±ГІГј ГЇГ°Г®Г¤ГіГЄГ¶ВіВї Г¬ГҐГ­ГёГ  Г§Г  Г±ГҐГ°ГҐГ¤Г­Гѕ ГЄВіГ«ГјГЄВіГ±ГІГј ГЇГ°Г®Г¤ГіГЄГ¶ВіВї Гі ГўГ±ВіГµ ГЄГ®Г¬ГЇГ Г­ВіГїГµ.
 SELECT company.company_name
 FROM company
 JOIN company_product ON company.company_name = company_product.company_name
@@ -237,15 +237,15 @@ HAVING SUM(company_product.product_quantity) < (
         GROUP BY company_product.company_name
     ) AS avg_quantity
 );
--- 5. Вибір продуктів, кількість яких більше 2 для кожної компанії.
+-- 5. Г‚ГЁГЎВіГ° ГЇГ°Г®Г¤ГіГЄГІВіГў, ГЄВіГ«ГјГЄВіГ±ГІГј ГїГЄГЁГµ ГЎВіГ«ГјГёГҐ 2 Г¤Г«Гї ГЄГ®Г¦Г­Г®Вї ГЄГ®Г¬ГЇГ Г­ВіВї.
 SELECT company_product.product_id, company.company_name, COUNT(*) AS product_count
 FROM company_product
 JOIN company ON company_product.company_name = company.company_name
 GROUP BY company_product.product_id, company.company_name
 HAVING COUNT(*) > 2;;
 
--- Завдання 11
--- 1. Вибір компаній, у яких є продукти, кількість яких більша за 2 одиниць, і які без по батькові
+-- Г‡Г ГўГ¤Г Г­Г­Гї 12
+-- 1. Г‚ГЁГЎВіГ° ГЄГ®Г¬ГЇГ Г­ВіГ©, Гі ГїГЄГЁГµ Вє ГЇГ°Г®Г¤ГіГЄГІГЁ, ГЄВіГ«ГјГЄВіГ±ГІГј ГїГЄГЁГµ ГЎВіГ«ГјГёГ  Г§Г  2 Г®Г¤ГЁГ­ГЁГ¶Гј, Ві ГїГЄВі ГЎГҐГ§ ГЇГ® ГЎГ ГІГјГЄГ®ГўВі
 SELECT company.company_name, company.address, company_product.product_id, company_product.product_quantity
 FROM company
 JOIN company_product ON company.company_name = company_product.company_name
@@ -253,21 +253,21 @@ JOIN company_owner_company ON company.company_name = company_owner_company.compa
 JOIN company_owner ON company_owner_company.owner_id = company_owner.owner_id
 WHERE company_product.product_quantity > 2 
 AND company_owner.surname IS NULL;
--- 2. Вибір компаній і продуктів, де ціна за одиницю більше 1000, та продукт належить компанії з назвою "ТехноКорп"
+-- 2. Г‚ГЁГЎВіГ° ГЄГ®Г¬ГЇГ Г­ВіГ© Ві ГЇГ°Г®Г¤ГіГЄГІВіГў, Г¤ГҐ Г¶ВіГ­Г  Г§Г  Г®Г¤ГЁГ­ГЁГ¶Гѕ ГЎВіГ«ГјГёГҐ 1000, ГІГ  ГЇГ°Г®Г¤ГіГЄГІ Г­Г Г«ГҐГ¦ГЁГІГј ГЄГ®Г¬ГЇГ Г­ВіВї Г§ Г­Г Г§ГўГ®Гѕ "Г’ГҐГµГ­Г®ГЉГ®Г°ГЇ"
 SELECT company.company_name, product.name, product.price_per_unit
 FROM company
 JOIN company_product ON company.company_name = company_product.company_name
 JOIN product ON company_product.product_id = product.product_id
 WHERE product.price_per_unit > 1000 
-AND company.company_name = 'ТехноКорп';
--- 3. Вибір компаній, у яких є продукти з кількістю більше за 2 одиниць, та мають контракт з компанією "ТехноКорп"
+AND company.company_name = 'Г’ГҐГµГ­Г®ГЉГ®Г°ГЇ';
+-- 3. Г‚ГЁГЎВіГ° ГЄГ®Г¬ГЇГ Г­ВіГ©, Гі ГїГЄГЁГµ Вє ГЇГ°Г®Г¤ГіГЄГІГЁ Г§ ГЄВіГ«ГјГЄВіГ±ГІГѕ ГЎВіГ«ГјГёГҐ Г§Г  2 Г®Г¤ГЁГ­ГЁГ¶Гј, ГІГ  Г¬Г ГѕГІГј ГЄГ®Г­ГІГ°Г ГЄГІ Г§ ГЄГ®Г¬ГЇГ Г­ВіВєГѕ "Г’ГҐГµГ­Г®ГЉГ®Г°ГЇ"
 SELECT company.company_name, company_product.product_id, company_product.product_quantity
 FROM company
 JOIN company_product ON company.company_name = company_product.company_name
 JOIN contract ON company.company_name = contract.supplier_company
 WHERE company_product.product_quantity > 2
-AND contract.supplier_company = 'ТехноКорп';
--- 4. Вибір компаній, що мають продукти з ціною менше 5000 і уклали контракт з компанією, яка є їх постачальником
+AND contract.supplier_company = 'Г’ГҐГµГ­Г®ГЉГ®Г°ГЇ';
+-- 4. Г‚ГЁГЎВіГ° ГЄГ®Г¬ГЇГ Г­ВіГ©, Г№Г® Г¬Г ГѕГІГј ГЇГ°Г®Г¤ГіГЄГІГЁ Г§ Г¶ВіГ­Г®Гѕ Г¬ГҐГ­ГёГҐ 5000 Ві ГіГЄГ«Г Г«ГЁ ГЄГ®Г­ГІГ°Г ГЄГІ Г§ ГЄГ®Г¬ГЇГ Г­ВіВєГѕ, ГїГЄГ  Вє ВїГµ ГЇГ®Г±ГІГ Г·Г Г«ГјГ­ГЁГЄГ®Г¬
 SELECT company.company_name, product.name, product.price_per_unit
 FROM company
 JOIN company_product ON company.company_name = company_product.company_name
@@ -275,7 +275,7 @@ JOIN product ON company_product.product_id = product.product_id
 JOIN contract ON company.company_name = contract.receiver_company
 WHERE product.price_per_unit < 5000 
 AND contract.supplier_company = company.company_name;
--- 5. Вибір компаній, де є продукти з кількістю більше 2 одиниць і ціна яких менша за 2000, та їх постачальник — "ТехноКорп"
+-- 5. Г‚ГЁГЎВіГ° ГЄГ®Г¬ГЇГ Г­ВіГ©, Г¤ГҐ Вє ГЇГ°Г®Г¤ГіГЄГІГЁ Г§ ГЄВіГ«ГјГЄВіГ±ГІГѕ ГЎВіГ«ГјГёГҐ 2 Г®Г¤ГЁГ­ГЁГ¶Гј Ві Г¶ВіГ­Г  ГїГЄГЁГµ Г¬ГҐГ­ГёГ  Г§Г  2000, ГІГ  ВїГµ ГЇГ®Г±ГІГ Г·Г Г«ГјГ­ГЁГЄ вЂ” "Г’ГҐГµГ­Г®ГЉГ®Г°ГЇ"
 SELECT company.company_name, product.name, company_product.product_quantity, product.price_per_unit
 FROM company
 JOIN company_product ON company.company_name = company_product.company_name
@@ -283,6 +283,4 @@ JOIN product ON company_product.product_id = product.product_id
 JOIN contract ON company.company_name = contract.receiver_company
 WHERE company_product.product_quantity > 2
 AND product.price_per_unit < 2000
-AND contract.supplier_company = 'ТехноКорп';
-
--- Завдання 12
+AND contract.supplier_company = 'Г’ГҐГµГ­Г®ГЉГ®Г°ГЇ';
